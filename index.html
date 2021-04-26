@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    body{
+      height: 100vh;
+      display: grid;
+      justify-content: top;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 500;
+      background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,93,1) 22%, rgba(0,212,255,1) 100%);    }
+    thead{
+      background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(58,9,121,1) 22%, rgba(0,212,255,1) 100%);    }
+.success, .error {
+      color: white;
+      padding: 5px;
+      margin: 5px 0 15px 0;
+      align-self: center;
+    }
+    .success {
+      background: green;
+    }
+    .error {
+      background: red;
+    }
+  </style>
+  <title>Expense Tracker</title>
+</head>
+<body>
+  <header><h1>Expense Tracker</h1></header>
+    <h2>Add A New Item:</h2>
+    <form id="ex-form">
+      <label for="name">Name</label>
+      <input id="name" type="text">
+      <label for="date">Date</label>
+      <input id="date" type="date" name="date">
+      <label for="amount">Amount</label>
+      <input id="amount" type="number">
+      <button type="submit">Add Expense</button>
+    </form>
+    <table class="mytable">
+     <thead>
+      <tr><th id="names">Description</th>
+      <th id="dates">Date</th>
+      <th id="amounts">Amount</th></tr>
+    </thead> <tbody>
+    </tbody>
+    </table>
+    <script src="app.js"></script>
+</body>
+</html>
