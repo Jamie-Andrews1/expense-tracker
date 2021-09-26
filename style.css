@@ -1,18 +1,18 @@
 * {
   box-sizing: border-box;
 }
+
 body {
-  height: 100vh;
   display: grid;
+  height: 100vh;
   text-align: center;
   font-size: clamp(1.5rem, 2.5vw, 4rem);
   font-weight: 500;
-  background: rgb(2, 0, 36);
+  background: rgb(0, 0, 0);
   background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 121, 93, 1) 22%,
-    rgba(0, 212, 255, 1) 100%
+    270deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(52, 232, 158, 1) 100%
   );
 }
 h1 {
@@ -44,7 +44,6 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 600px;
   line-height: 1.6em;
   margin-bottom: 1rem;
   font-weight: 600;
@@ -53,6 +52,7 @@ input {
   border-radius: 5px;
   max-width: auto;
   line-height: 1.6em;
+  font-size: clamp(1rem, 2.5vw, 2rem);
 }
 button {
   font-size: clamp(1rem, 2.5vw, 2rem);
@@ -62,7 +62,4 @@ button {
 }
 #name {
   width: 80%;
-}
-table {
-  margin-bottom: 20px;
 }
