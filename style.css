@@ -17,6 +17,7 @@ body {
     rgb(55, 61, 63) 0%,
     rgba(52, 232, 158, 1) 100%
   );
+  margin: 2rem 0 2rem 0;
 }
 h1 {
   margin: 0;
@@ -84,7 +85,7 @@ button:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #name {
-  width: 80%;
+  width: min(80ch, 80%);
 }
 .delete {
   color: red;
