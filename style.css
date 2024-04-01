@@ -1,3 +1,6 @@
+:root {
+  --padding: 0px 32px 0px 24px;
+}
 * {
   box-sizing: border-box;
 }
@@ -11,7 +14,7 @@ body {
   background: rgb(0, 0, 0);
   background: linear-gradient(
     270deg,
-    rgba(0, 0, 0, 1) 0%,
+    rgb(55, 61, 63) 0%,
     rgba(52, 232, 158, 1) 100%
   );
 }
@@ -21,8 +24,8 @@ h1 {
 thead {
   background: rgb(2, 0, 36);
   background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
+    270deg,
+    rgb(55, 61, 63) 0%,
     rgba(58, 9, 121, 1) 22%,
     rgba(0, 212, 255, 1) 100%
   );
@@ -49,17 +52,40 @@ form {
   font-weight: 600;
 }
 input {
-  border-radius: 5px;
+  border-radius: 10px;
+  font: inherit;
   max-width: auto;
   line-height: 1.6em;
   font-size: clamp(1rem, 2.5vw, 2rem);
+  padding: var(--padding);
+}
+input:focus-visible {
+  outline: blue solid 2px;
+}
+input[type="date"] {
+  font: inherit;
 }
 button {
+  font: inherit;
   font-size: clamp(1rem, 2.5vw, 2rem);
-  font-weight: 600;
+  word-spacing: 8px;
+  border-radius: 10px;
+  font-weight: 400;
   margin-top: 10px;
   max-width: 400px;
+  padding: var(--padding);
+  transition-duration: 0.4s;
+}
+button:focus-visible {
+  outline: blue solid 2px;
+}
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #name {
   width: 80%;
+}
+.delete {
+  color: red;
 }

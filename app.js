@@ -1,11 +1,11 @@
+const tbody = document.querySelector("tbody");
+const table = document.querySelector(".mytable");
 
-const tbody = document.querySelector('tbody');
-const table = document.querySelector('.mytable')
+const submit = document.querySelector("button");
 
-const submit = document.querySelector('button');
-//classes 
+//classes
 class Expense {
-  constructor(desc, date, amount){
+  constructor(desc, date, amount) {
     this.desc = desc;
     this.date = date;
     this.amount = amount;
@@ -13,64 +13,64 @@ class Expense {
 }
 
 class UI {
-  addExpenseToList(expense){
-    const row = document.createElement('tr');
+  addExpenseToList(expense) {
+    const row = document.createElement("tr");
     row.innerHTML = `
       <td>${expense.desc}</td>
       <td>${expense.date}</td>
       <td>£${expense.amount}</td>
       <td><a href="#" class="delete" style="text-decoration: none;">&times<a></td>`;
 
-      tbody.appendChild(row);
+    tbody.appendChild(row);
   }
 
   showAlert(message, className) {
-    const div = document.createElement('div');
+    const div = document.createElement("div");
 
     div.className = `alert ${className}`;
 
     div.appendChild(document.createTextNode(message));
 
-    const body = document.querySelector('body');
-    const form = document.querySelector('#ex-form');
+    const body = document.querySelector("body");
+    const form = document.querySelector("#ex-form");
 
     body.insertBefore(div, form);
 
-    setTimeout(function(){
-      document.querySelector('.alert').remove();
-    }, 3000)
+    setTimeout(function () {
+      document.querySelector(".alert").remove();
+    }, 3000);
   }
 
-  deleteExpense(target){
-    if(target.className === 'delete'){
-      target.parentElement.parentElement.remove()
+  deleteExpense(target) {
+    if (target.className === "delete") {
+      target.parentElement.parentElement.remove();
     }
   }
 
-  clearFields(){
-      document.getElementById('name').value = '';
-      document.getElementById('date').value = '';
-      document.getElementById('amount').value = '';
-    }
+  clearFields() {
+    document.getElementById("name").value = "";
+    document.getElementById("date").value = "";
+    document.getElementById("amount").value = "";
+  }
 }
 
 // Local Storage Class
 
 class Store {
- static getExpenses() {
-  let expenses;
-  if(localStorage.getItem('expenses') === null) { 
-    expenses = [];
-  } else {
-    expenses = JSON.parse(localStorage.getItem('expenses'));
-  }
+  static getExpenses() {
+    let expenses;
+    if (localStorage.getItem("expenses") === null) {
+      expenses = [];
+    } else {
+      expenses = JSON.parse(localStorage.getItem("expenses"));
+    }
     return expenses;
-}
+  }
   static displayExpenses() {
     const expenses = Store.getExpenses();
 
-    expenses.forEach(function(expense){
-      const ui = new UI;
+    expenses.forEach(function (expense) {
+      const ui = new UI();
 
       // Add expense to ui
       ui.addExpenseToList(expense);
@@ -81,65 +81,66 @@ class Store {
 
     expenses.push(expense);
 
-    localStorage.setItem('expenses', JSON.stringify(expenses));
+    localStorage.setItem("expenses", JSON.stringify(expenses));
   }
   static removeExpense(desc) {
     const expenses = Store.getExpenses();
 
-    expenses.forEach(function(expense, index){
-      if(expense.desc === desc) {
+    expenses.forEach(function (expense, index) {
+      if (expense.desc === desc) {
         expenses.splice(index, 1);
       }
     });
 
-    localStorage.setItem('expenses', JSON.stringify(expenses));
+    localStorage.setItem("expenses", JSON.stringify(expenses));
   }
 }
 
 // Dom load event
-  document.addEventListener('DOMContentLoaded', Store.displayExpenses);
+document.addEventListener("DOMContentLoaded", Store.displayExpenses);
 
-  // Event listeners
-  submit.addEventListener('click', function(e) {
-    const desc = document.querySelector('#name').value
-    const date = document.querySelector('#date').value
-    const amount = document.querySelector('#amount').value
+// Event listeners
+submit.addEventListener("click", function (e) {
+  const desc = document.querySelector("#name").value;
+  const date = document.querySelector("#date").value;
+  const amount = document.querySelector("#amount").value;
 
-    const expense = new Expense(desc, date, amount);
+  const expense = new Expense(desc, date, amount);
 
-    const ui = new UI;
+  const ui = new UI();
 
-    // validate
-    if(desc === '' || date === '' || amount === ''){
-      //error alert
-      ui.showAlert('Please fill in all fields', 'error')
-    } else {
-      ui.showAlert('Expense Added!', 'success');
+  // validate
+  if (desc === "" || date === "" || amount === "") {
+    //error alert
+    ui.showAlert("Please fill in all fields", "error");
+  } else {
+    ui.showAlert("Expense Added!", "success");
 
-      ui.addExpenseToList(expense);
+    ui.addExpenseToList(expense);
 
-      Store.addExpense(expense);
+    Store.addExpense(expense);
 
-      ui.clearFields();
-    }
-    e.preventDefault();
-  });
+    ui.clearFields();
+  }
+  e.preventDefault();
+});
 
-  tbody.addEventListener('click',
-  function(e){
-    const ui = new UI();
+tbody.addEventListener("click", function (e) {
+  const ui = new UI();
 
-    ui.deleteExpense(e.target);
-    
-    // remove from ls
-    Store.removeExpense(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
+  ui.deleteExpense(e.target);
 
-    // Show message
-    ui.showAlert('Expense Removed', 'success');
+  // remove from ls
+  Store.removeExpense(
+    e.target.parentElement.previousElementSibling.previousElementSibling
+      .previousElementSibling.textContent
+  );
 
-    e.preventDefault();
+  // Show message
+  ui.showAlert("Expense Removed", "success");
 
-  })
+  e.preventDefault();
+});
 
 // submit.addEventListener('click', (e) => {
 //   if(name.value === '' || date === '' || amount.value === '') {
@@ -158,12 +159,10 @@ class Store {
 //       let text = document.createTextNode('X');
 //       del.appendChild(text);
 
-
 //       cell.appendChild(cellText);
 //       cell1.appendChild(cellText1);
 //       cell2.appendChild(cellText2);
 //       cell3.appendChild(del)
-
 
 //       row.appendChild(cell)
 //       row.appendChild(cell1)
@@ -188,7 +187,7 @@ class Store {
 //   document.getElementById('amount').value = '';
 // }
 
-// document.querySelector('tbody').addEventListener('click', (e) => { 
+// document.querySelector('tbody').addEventListener('click', (e) => {
 //   if(e.target.id === 'rem'){
 //     e.target.parentElement.parentElement.remove()
 //   }
