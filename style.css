@@ -4,12 +4,14 @@
 * {
   box-sizing: border-box;
 }
-
+html {
+  font-family: sans-serif;
+}
 body {
+  margin: 0;
   display: grid;
-  height: 100vh;
-  text-align: center;
-  font-size: clamp(1.5rem, 2.5vw, 4rem);
+  place-items: center;
+  font-size: clamp(1rem, 2vw, 50%);
   font-weight: 500;
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -17,10 +19,9 @@ body {
     rgb(55, 61, 63) 0%,
     rgba(52, 232, 158, 1) 100%
   );
-  margin: 2rem 0 2rem 0;
 }
-h1 {
-  margin: 0;
+table {
+  width: 100%;
 }
 thead {
   background: rgb(2, 0, 36);
@@ -31,35 +32,59 @@ thead {
     rgba(0, 212, 255, 1) 100%
   );
 }
-.success,
-.error {
-  color: white;
+#desc {
+  width: min(60ch, 80%);
+}
+#amount {
+  width: 15ch;
+}
+#tdesc {
+  width: 50%;
+}
+tbody tr > * {
+  padding: 1rem 2rem;
+}
+
+td:has(.delete) {
+  width: fit-content;
+}
+.alert {
   padding: 5px;
+  position: absolute;
+  inset: auto;
+  border-radius: 10px;
   margin: 5px 0 15px 0;
-  align-self: center;
+  font-weight: 800;
+  opacity: 0;
+  background-color: aliceblue;
+  transition: opacity 0.5s ease;
 }
 .success {
-  background: green;
+  opacity: 1;
+  border: 4px solid green;
 }
 .error {
-  background: red;
+  opacity: 1;
+  border: 4px solid red;
 }
 form {
   display: flex;
   flex-direction: column;
+  width: 90%;
   align-items: center;
-  line-height: 1.6em;
   margin-bottom: 1rem;
   font-weight: 600;
+  & > * {
+    margin-top: 1rem;
+  }
 }
 input {
   border-radius: 10px;
   font: inherit;
-  max-width: auto;
-  line-height: 1.6em;
-  font-size: clamp(1rem, 2.5vw, 2rem);
+  font-size: clamp(1rem, 2vw, 50%);
   padding: var(--padding);
 }
+
 input:focus-visible {
   outline: blue solid 2px;
 }
@@ -68,11 +93,10 @@ input[type="date"] {
 }
 button {
   font: inherit;
-  font-size: clamp(1rem, 2.5vw, 2rem);
-  word-spacing: 8px;
+  font-size: clamp(1rem, 2vw, 50%);
   border-radius: 10px;
   font-weight: 400;
-  margin-top: 10px;
+  margin-top: 2rem;
   max-width: 400px;
   padding: var(--padding);
   transition-duration: 0.4s;
@@ -84,9 +108,11 @@ button:hover {
   cursor: pointer;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-#name {
-  width: min(80ch, 80%);
-}
+
 .delete {
+  font-size: 1.5rem;
   color: red;
+  &:hover {
+    opacity: 0.5;
+  }
 }

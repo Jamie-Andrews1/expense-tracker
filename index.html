@@ -8,10 +8,13 @@
   </head>
   <body>
     <header><h1>Expense Tracker</h1></header>
+    <h4>
+      Total:
+      <span class="total"></span>
     <h2>Add A New Item:</h2>
     <form id="ex-form">
-      <label for="name">Description</label>
-      <input id="name" type="text" />
+      <label for="desc">Description</label>
+      <input id="desc" type="text" />
       <label for="date">Date</label>
       <input id="date" type="date" name="date" />
       <label for="amount">Amount</label>
@@ -21,9 +24,9 @@
     <table class="mytable">
       <thead>
         <tr>
-          <th id="names">Description</th>
-          <th id="dates">Date</th>
-          <th id="amounts">Amount</th>
+          <th id="tdesc">Description</th>
+          <th id="tdates">Date</th>
+          <th id="tamounts" colspan="2">Amount</th>
         </tr>
       </thead>
       <tbody></tbody>

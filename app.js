@@ -1,6 +1,5 @@
 const tbody = document.querySelector("tbody");
 const table = document.querySelector(".mytable");
-
 const submit = document.querySelector("button");
 
 //classes
@@ -19,9 +18,19 @@ class UI {
       <td>${expense.desc}</td>
       <td>${expense.date}</td>
       <td>£${expense.amount}</td>
-      <td><a href="#" class="delete" style="text-decoration: none;">&times<a></td>`;
+      <td><a href="#" class="delete" style="text-decoration: none;">&times</a></td>`;
 
     tbody.appendChild(row);
+  }
+
+  static showTotal(total) {
+    const totalDiv = document.querySelector(".total");
+    if (totalDiv !== "") {
+      totalDiv.textContent = "";
+      totalDiv.appendChild(document.createTextNode(`£${total}`));
+    } else {
+      totalDiv.appendChild(document.createTextNode(`£${total}`));
+    }
   }
 
   showAlert(message, className) {
@@ -48,14 +57,13 @@ class UI {
   }
 
   clearFields() {
-    document.getElementById("name").value = "";
+    document.getElementById("desc").value = "";
     document.getElementById("date").value = "";
     document.getElementById("amount").value = "";
   }
 }
 
 // Local Storage Class
-
 class Store {
   static getExpenses() {
     let expenses;
@@ -66,23 +74,42 @@ class Store {
     }
     return expenses;
   }
+
+  static displayTotal() {
+    const expenses = Store.getExpenses();
+
+    if (expenses.length > 0) {
+      const arr = [];
+      for (const e of expenses) {
+        arr.push(parseFloat(e.amount));
+      }
+      const total = arr.reduce((a, c) => a + c);
+      UI.showTotal(total);
+    }
+  }
+
   static displayExpenses() {
     const expenses = Store.getExpenses();
 
+    Store.displayTotal();
+
     expenses.forEach(function (expense) {
       const ui = new UI();
-
       // Add expense to ui
+
       ui.addExpenseToList(expense);
     });
   }
+
   static addExpense(expense) {
     const expenses = Store.getExpenses();
 
     expenses.push(expense);
 
     localStorage.setItem("expenses", JSON.stringify(expenses));
+    Store.displayTotal();
   }
+
   static removeExpense(desc) {
     const expenses = Store.getExpenses();
 
@@ -93,6 +120,7 @@ class Store {
     });
 
     localStorage.setItem("expenses", JSON.stringify(expenses));
+    Store.displayTotal();
   }
 }
 
@@ -101,18 +129,20 @@ document.addEventListener("DOMContentLoaded", Store.displayExpenses);
 
 // Event listeners
 submit.addEventListener("click", function (e) {
-  const desc = document.querySelector("#name").value;
+  const desc = document.querySelector("#desc").value;
   const date = document.querySelector("#date").value;
   const amount = document.querySelector("#amount").value;
 
-  const expense = new Expense(desc, date, amount);
+  const properDate = date.split("-").reverse().join("-");
+
+  const expense = new Expense(desc, properDate, amount);
 
   const ui = new UI();
 
   // validate
   if (desc === "" || date === "" || amount === "") {
     //error alert
-    ui.showAlert("Please fill in all fields", "error");
+    ui.showAlert("Must fill in all fields!!", "error");
   } else {
     ui.showAlert("Expense Added!", "success");
 
