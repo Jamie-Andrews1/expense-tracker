@@ -8,6 +8,9 @@ html {
   font-family: sans-serif;
 }
 body {
+  height: 100vh;
+  height: 100svh;
+
   margin: 0;
   display: grid;
   place-items: center;
@@ -38,11 +41,18 @@ thead {
 #amount {
   width: 15ch;
 }
-#tdesc {
-  width: 50%;
+thead tr {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+tbody tr {
+  display: grid;
+  grid-template-columns: 2fr 1fr 0.5fr 0.5fr;
+  justify-items: center;
+  align-items: center;
 }
 tbody tr > * {
-  padding: 1rem 2rem;
+  padding: 1rem 0;
 }
 
 td:has(.delete) {
@@ -74,6 +84,7 @@ form {
   align-items: center;
   margin-bottom: 1rem;
   font-weight: 600;
+  width: 100%;
   & > * {
     margin-top: 1rem;
   }
