@@ -77,14 +77,16 @@ class Store {
 
   static displayTotal() {
     const expenses = Store.getExpenses();
-
+    let total = 0;
     if (expenses.length > 0) {
       const arr = [];
       for (const e of expenses) {
         arr.push(parseFloat(e.amount));
       }
-      const total = arr.reduce((a, c) => a + c);
-      UI.showTotal(total);
+      total = arr.reduce((a, c) => a + c);
+      return UI.showTotal(total);
+    } else {
+      return UI.showTotal(total);
     }
   }
 
